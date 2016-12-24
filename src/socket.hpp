@@ -107,7 +107,7 @@ public:
    * @param freshness FreshnessPeriod of the data packet.
    */
   void
-  publishData(const uint8_t* buf, size_t len, const ndn::time::milliseconds& freshness,
+  publishData(const uint8_t* buf, size_t len, const ndn::time::milliseconds& freshness, uint64_t seqNo,
               const Name& prefix = DEFAULT_PREFIX);
 
   /**
@@ -123,7 +123,7 @@ public:
    * @param freshness FreshnessPeriod of the data packet.
    */
   void
-  publishData(const Block& content, const ndn::time::milliseconds& freshness,
+  publishData(const Block& content, const ndn::time::milliseconds& freshness, uint64_t seqNo,
               const Name& prefix = DEFAULT_PREFIX);
 
   /**

@@ -100,21 +100,22 @@ Socket::removeSyncNode(const Name& prefix)
 }
 
 void
-Socket::publishData(const uint8_t* buf, size_t len, const ndn::time::milliseconds& freshness,
+Socket::publishData(const uint8_t* buf, size_t len, const ndn::time::milliseconds& freshness, uint64_t seqNo,
                     const Name& prefix)
 {
-  publishData(ndn::encoding::makeBinaryBlock(ndn::tlv::Content, buf, len), freshness, prefix);
+  publishData(ndn::encoding::makeBinaryBlock(ndn::tlv::Content, buf, len), freshness, seqNo, prefix);
 }
 
 void
-Socket::publishData(const Block& content, const ndn::time::milliseconds& freshness,
+Socket::publishData(const Block& content, const ndn::time::milliseconds& freshness, uint64_t seqNo,
                     const Name& prefix)
 {
   shared_ptr<Data> data = make_shared<Data>();
   data->setContent(content);
   data->setFreshnessPeriod(freshness);
 
-  SeqNo newSeq = m_logic.getSeqNo(prefix) + 1;
+  //SeqNo newSeq = m_logic.getSeqNo(prefix) + 1;
+  SeqNo newSeq = seqNo;
   Name dataName;
   dataName.append(m_logic.getSessionName(prefix)).appendNumber(newSeq);
   data->setName(dataName);
