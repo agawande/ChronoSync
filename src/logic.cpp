@@ -327,7 +327,7 @@ Logic::onSyncInterest(const Name& prefix, const Interest& interest)
   else if (name.size() >= 2 && RECOVERY_COMPONENT == name.get(-2)) {
     processRecoveryInterest(interest);
   }
-  else {
+  else if (interest.getExclude().empty()) {
     processSyncInterest(interest.shared_from_this());
   }
 
