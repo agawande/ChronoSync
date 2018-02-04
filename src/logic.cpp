@@ -765,6 +765,7 @@ Logic::sendExcludeInterest(const Interest& interest, const Data& data)
   Exclude exclude = interest.getExclude();
   exclude.excludeOne(data.getFullName().get(-1));
   excludeInterest.setExclude(exclude);
+  excludeInterest.setMustBeFresh(true);
 
   excludeInterest.setInterestLifetime(m_syncInterestLifetime);
 
